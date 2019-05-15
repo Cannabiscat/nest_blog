@@ -1,0 +1,13 @@
+{
+  "name": "nest_blog",
+  "version": "0.0.1",
+  "description": "Blog on nestjs/vuejs frameworks",
+  "main": "index.js",
+  "repository": "git@github.com:Cannabiscat/nest_blog.git",
+  "author": "Alex Vyatkin <alexander.vjatkin@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "serve": "docker-compose  -f docker-compose_serve.yml up --build --force-recreate --abort-on-container-exit"
+  }
+}

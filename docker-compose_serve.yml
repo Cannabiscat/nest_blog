@@ -1,0 +1,37 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    expose:
+      - 27017
+    networks:
+      - nest_blog
+  nest_backend:
+    image: node:10-alpine
+    working_dir: /app/blog-backend
+    entrypoint: sh -c "yarn start:dev"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/nest_blog
+    networks:
+      - nest_blog
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongodb
+
+  nest_frontend:
+    image: node:10-alpine
+    working_dir: /app/blog-frontend
+    entrypoint: sh -c "yarn serve"
+    ports:
+      - 8080:8080
+    networks:
+      - nest_blog
+    volumes:
+      - ./:/app
+    depends_on:
+      - nest_backend
+
+networks:
+  nest_blog:
